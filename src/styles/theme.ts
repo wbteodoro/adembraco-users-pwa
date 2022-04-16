@@ -35,5 +35,12 @@ export const theme = {
     limeGreen: '#c5de89',
     success: '#008014',
     error: '#e74c3c'
+  },
+  effects: {
+    dropShadow: {
+      elev1: '0 0.2rem 0.4rem rgba(0, 0, 0, 0.04)',
+      elev2: '0 0.4rem 0.8rem rgba(0, 0, 0, 0.04)',
+      elev3: '0 0.8rem 1.6rem rgba(0, 0, 0, 0.08)'
+    }
   }
 }
