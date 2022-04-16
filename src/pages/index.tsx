@@ -1,5 +1,5 @@
-import TemplateLogin from '@/templates/login'
+import TemplateHome from "@/templates/initial-page";
 
-export default function Login() {
-  return <TemplateLogin />
+export default function HomePage() {
+  return <TemplateHome />
 }
