@@ -7,9 +7,9 @@ import * as S from './styles'
 const TemplateLogin = () => {
   const router = useRouter()
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    router.push('/reservas/quadras')
+    router.push('/')
   }
 
   return (

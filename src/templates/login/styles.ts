@@ -6,11 +6,11 @@ export const Wrapper = styled.div`
   width: 100vw;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.green};
+  background-color: ${({ theme }) => theme.colors.white};
 `
 
 export const ContainerLogin = styled.div`
-  width: 500px;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
