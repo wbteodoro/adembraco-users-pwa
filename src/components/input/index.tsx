@@ -1,4 +1,5 @@
-import React, { forwardRef, useCallback, useState } from 'react'
+import React, { ChangeEvent, useCallback, useState } from 'react'
+import { InputProps } from './types'
 import * as S from './styles'
 
 const Input = (
@@ -12,8 +13,7 @@ const Input = (
     value,
     border = true,
     ...props
-  },
-  ref
+  }: InputProps,
 ) => {
   const [visibility, setVisibility] = useState(false)
 
@@ -40,7 +40,7 @@ const Input = (
   }
 
   const handleChange = useCallback(
-    event => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       !!onChange && onChange(event)
     },
     [onChange]
@@ -68,7 +68,6 @@ const Input = (
           name={name}
           type={_type}
           id={name}
-          ref={ref}
         />
         <S.InputIcon onClick={handleVisibleInputPassword}>
           {icon ? icon : renderIconByType()}
@@ -80,4 +79,4 @@ const Input = (
   )
 }
 
-export default forwardRef(Input)
+export default Input

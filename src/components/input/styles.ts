@@ -1,17 +1,18 @@
 import styled, { css } from 'styled-components'
 import {
-  MdArrowDropDown,
-  MdError,
-  MdEvent,
-  MdVisibility,
-  MdVisibilityOff
-} from 'react-icons/md'
+  ArrowDropDown,
+  Error as MdError,
+  Event,
+  Visibility,
+  VisibilityOff
+} from '@styled-icons/material'
+import { WrapperProps, ButtonProps } from './types'
 
-const borderWithColor = (color, border) => css`
+const borderWithColor = (color: string, border?: boolean) => css`
   border: ${border ? `1px solid ${color}` : 'none'};
 `
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<WrapperProps>`
   width: 100%;
   position: relative;
 
@@ -81,7 +82,7 @@ export const Error = styled.span`
 
 export const Input = styled.input``
 
-export const IconEvent = styled(MdEvent).attrs({
+export const IconEvent = styled(Event).attrs({
   size: 24
 })``
 
@@ -95,12 +96,12 @@ const PasswordIcon = css`
   color: ${({ theme }) => theme.colors.grey};
 `
 
-export const IconVisibility = styled(MdVisibility).attrs({
+export const IconVisibility = styled(Visibility).attrs({
   size: 24
 })`
   ${PasswordIcon}
 `
-export const IconVisibilityOff = styled(MdVisibilityOff).attrs({
+export const IconVisibilityOff = styled(VisibilityOff).attrs({
   size: 24
 })`
   ${PasswordIcon}
@@ -128,7 +129,7 @@ export const InputTypeColor = styled.input.attrs({
   hidden: true
 })``
 
-export const Button = styled.button`
+export const Button = styled.button<ButtonProps>`
   border-radius: 8px;
   padding: 8px;
   background: none;
@@ -142,7 +143,7 @@ export const Button = styled.button`
   `}
 `
 
-export const IconArrowDropDown = styled(MdArrowDropDown).attrs(({ theme }) => ({
+export const IconArrowDropDown = styled(ArrowDropDown).attrs(({ theme }) => ({
   size: 24,
   color: theme.colors.grey
 }))``
