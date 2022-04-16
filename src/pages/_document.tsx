@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
             {sheet.getStyleElement()}
           </>
         )
-      }
+      } as any
     } finally {
       sheet.seal()
     }
