@@ -30,6 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     html,
     body {
       min-height: 100%;
+      background-color: ${theme.colors.white};
     }
 
     body {

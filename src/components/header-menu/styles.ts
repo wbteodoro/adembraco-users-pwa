@@ -13,8 +13,10 @@ export const Wrapper = styled.div`
 `
 
 export const WrapperHeader = styled.div`
-  top: 0;
   position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,7 +51,7 @@ export const MenuIcon = styled(Menu).attrs(({ theme }) => ({
 }))``
 
 export const SideMenu = styled.div<SideMenuProps>`
-  position: absolute;
+  position: fixed;
   top: ${HEADER_HEIGHT};
   width: 100%;
   height: calc(100% - ${HEADER_HEIGHT});
