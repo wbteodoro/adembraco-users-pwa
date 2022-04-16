@@ -2,19 +2,17 @@ import React, { ChangeEvent, useCallback, useState } from 'react'
 import { InputProps } from './types'
 import * as S from './styles'
 
-const Input = (
-  {
-    name,
-    type = 'text',
-    label,
-    error,
-    icon,
-    onChange,
-    value,
-    border = true,
-    ...props
-  }: InputProps,
-) => {
+const Input = ({
+  name,
+  type = 'text',
+  label,
+  error,
+  icon,
+  onChange,
+  value,
+  border = true,
+  ...props
+}: InputProps) => {
   const [visibility, setVisibility] = useState(false)
 
   const handleVisibleInputPassword = () => {

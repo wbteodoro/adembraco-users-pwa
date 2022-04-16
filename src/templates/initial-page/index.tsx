@@ -7,9 +7,7 @@ const TemplateHome = () => {
       <Head>
         <title>ADEMBRACO - Início</title>
       </Head>
-      <MainLayout>
-          askjdaskljdas
-      </MainLayout>
+      <MainLayout>askjdaskljdas</MainLayout>
     </>
   )
 }

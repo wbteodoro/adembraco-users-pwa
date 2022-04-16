@@ -2,10 +2,7 @@ import React, { forwardRef } from 'react'
 import { ButtonProps, WrapperProps } from './types'
 import * as S from './styles'
 
-const Button: React.ForwardRefRenderFunction<
-  WrapperProps,
-  ButtonProps
-> = (
+const Button: React.ForwardRefRenderFunction<WrapperProps, ButtonProps> = (
   {
     disabled = false,
     fullWidth = false,
