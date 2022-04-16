@@ -52,7 +52,7 @@ export const SideMenu = styled.div<SideMenuProps>`
   position: absolute;
   top: ${HEADER_HEIGHT};
   width: 100%;
-  height: 100%;
+  height: calc(100% - ${HEADER_HEIGHT});
   background-color: ${({ theme }) => theme.colors.green};
   z-index: 1;
   transform: ${({ isOpen }) =>

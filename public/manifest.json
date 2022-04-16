@@ -3,7 +3,7 @@
     "background_color": "#fff",
     "display": "standalone",
     "scope": "/",
-    "start_url": "/",
+    "start_url": "/entrar",
     "name": "ADEMBRACO ACESSO USU\u00c1RIO",
     "short_name": "ADEMBRACO",
     "description": "Este App \u00e9 uma vers\u00e3o PWA para Sistema Adembraco.",
