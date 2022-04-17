@@ -14,11 +14,14 @@ const stepsSettings = [
 
 type TemplateReservationProps = {
   placesGroupsOptions: GenericOptionType[]
-} & Pick<PlacesOptionsProps, 'placeOptions'>
+  onChooseGroup?(group: GenericOptionType): void
+} & Pick<PlacesOptionsProps, 'placeOptions' | 'onChooseCard'>
 
 const TemplateReservations = ({
   placeOptions,
-  placesGroupsOptions
+  placesGroupsOptions,
+  onChooseCard,
+  onChooseGroup
 }: TemplateReservationProps) => {
   const [currentStep, setCurrentStep] = React.useState(0)
 
@@ -52,6 +55,8 @@ const TemplateReservations = ({
           <ScheduleReservations
             placesGroupsOptions={placesGroupsOptions}
             placeOptions={placeOptions}
+            onChooseGroup={onChooseGroup}
+            onChooseCard={onChooseCard}
           />
         )}
         {currentStep === 1 && (

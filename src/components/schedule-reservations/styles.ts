@@ -28,6 +28,16 @@ export const WrapperCards = styled.div`
   padding: 16px 0;
 `
 
+export const WrapperSelectPlace = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  padding-top: 8px;
+`
+
 export const Title = styled.h1``
 
 export const PlaceIcon = styled(Place).attrs(props => ({

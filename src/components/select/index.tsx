@@ -1,4 +1,4 @@
-import React, { ChangeEvent, forwardRef, useCallback } from 'react'
+import React, { ChangeEvent, forwardRef, useCallback, useEffect } from 'react'
 import { Error } from 'styled-icons/material'
 import { GenericFieldType, GenericOptionType } from '@/types/fields'
 import * as S from './styles'
@@ -10,6 +10,7 @@ export type SelectProps = {
     label: string
     link: string
   }
+  defaultLabel?: string
 } & GenericFieldType<string, HTMLSelectElement>
 
 export type InfoProps = {
@@ -17,8 +18,10 @@ export type InfoProps = {
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ label, options, infoLink, error, value, onBlur, onChange }, ref) => {
-    const optionList = [{ value: '', label: '' }, ...options]
+  (
+    { label, options, infoLink, error, value, onBlur, onChange, defaultLabel },
+    ref
+  ) => {
     const handleChange = useCallback(
       (event: ChangeEvent<HTMLSelectElement>) => {
         !!onChange && onChange(event.target.value)
@@ -35,12 +38,16 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ref={ref}
             onBlur={onBlur}
             onChange={handleChange}
+            defaultValue={defaultLabel}
           >
-            {optionList.map(item => (
-              <option key={item.value} value={item.value}>
-                {item.label}
-              </option>
-            ))}
+            <>
+              {defaultLabel && <option disabled>{defaultLabel}</option>}
+              {options.map(item => (
+                <option key={item.value} value={item.value}>
+                  {item.label}
+                </option>
+              ))}
+            </>
           </S.Field>
           {error && (
             <>
@@ -62,6 +69,6 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     )
   }
 )
-Select.displayName = ' - Selecione uma opção - '
+Select.displayName = 'Select'
 
 export default Select

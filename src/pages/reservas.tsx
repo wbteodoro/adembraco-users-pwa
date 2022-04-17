@@ -1,61 +1,32 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import TemplateReservations from '@/templates/reservations'
-
-const placesGroupsOptions = [
-  {
-    label: 'Quadra',
-    value: 'Quadra'
-  },
-  {
-    label: 'Quiosque',
-    value: 'Quiosque'
-  }
-]
-
-const placeOptions = [
-  {
-    placeId: '1',
-    placeGroup: 'Quadra',
-    name: 'Espaço 1',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur, nisi sed consectetur sagittis, nisl erat cursus lacus, eget condimentum nunc nisl eu nisi.',
-    imgUrl: '/images/image_place.jpg'
-  },
-  {
-    placeId: '2',
-    name: 'Espaço 2',
-    placeGroup: 'Quadra',
-    description:
-      'Nullam consectetur, nisi sed consectetur sagittis, nisl erat cursus lacus, eget condimentum nunc nisl eu nisi.',
-    imgUrl: '/images/image_place.jpg'
-  },
-  {
-    placeId: '3',
-    name: 'Área Lazer 1',
-    placeGroup: 'Quiosque',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur, nisi sed consectetur sagittis, nisl erat cursus lacus, eget condimentum nunc nisl eu nisi.',
-    imgUrl: '/images/image_place.jpg'
-  },
-  {
-    placeId: '4',
-    name: 'Área Lazer 2',
-    placeGroup: 'Quiosque',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur, nisi sed consectetur sagittis, nisl erat cursus lacus, eget condimentum nunc nisl eu nisi.',
-    imgUrl: '/images/image_place.jpg'
-  }
-]
+import { placesGroupsOptions, placeOptions } from '@/mocks'
 
 export default function ReservationsPage() {
+  const [placesOptionsByGroup, setPlacesOptionsByGroup] = useState([])
+
+  const handleChooseCard = option => {
+    console.log(option)
+  }
+
+  const handleChooseGroup = group => {
+    const placesFiltered = placeOptions.filter(
+      option => option.placeGroup === group
+    )
+    setPlacesOptionsByGroup(placesFiltered)
+  }
+
   return (
     <>
       <Head>
         <title>ADEMBRACO - Reservas</title>
       </Head>
       <TemplateReservations
-        placeOptions={placeOptions}
+        placeOptions={placesOptionsByGroup}
         placesGroupsOptions={placesGroupsOptions}
+        onChooseGroup={handleChooseGroup}
+        onChooseCard={handleChooseCard}
       />
     </>
   )

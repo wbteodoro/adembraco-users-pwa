@@ -15,6 +15,8 @@ export type PlacesOptionsProps = {
 export type ScheduleReservationsProps = {
   placeOptions: PlaceOptionsData[]
   placesGroupsOptions: GenericOptionType[]
+  onChooseCard?(place: PlaceOptionsData): void
+  onChooseGroup?(group: GenericOptionType): void
 }
 
 const PlacesOptions = ({ onChooseCard, placeOptions }: PlacesOptionsProps) => {
@@ -46,13 +48,17 @@ const collapseSettings = ({
     icon: <S.PlaceIcon />,
     heading: 'Selecionar Espaços',
     children: (
-      <>
-        <Select options={placesGroupsOptions} onChange={handleChooseGroup} />
+      <S.WrapperSelectPlace>
+        <Select
+          defaultLabel="Selecione o espaço desejado"
+          options={placesGroupsOptions}
+          onChange={handleChooseGroup}
+        />
         <PlacesOptions
           placeOptions={placeOptions}
           onChooseCard={handleChooseCard}
         />
-      </>
+      </S.WrapperSelectPlace>
     )
   },
   {
@@ -70,16 +76,18 @@ const collapseSettings = ({
 
 const ScheduleReservations = ({
   placeOptions,
-  placesGroupsOptions
+  placesGroupsOptions,
+  onChooseCard,
+  onChooseGroup
 }: ScheduleReservationsProps) => {
   const [activeCollapse, setActiveCollapse] = useState(0)
 
   const handleChooseCard = (option: PlaceOptionsData) => {
-    console.log(option)
+    !!onChooseCard && onChooseCard(option)
   }
 
-  const handleChooseGroup = (value: string) => {
-    console.log(value)
+  const handleChooseGroup = (group: GenericOptionType) => {
+    !!onChooseGroup && onChooseGroup(group)
   }
 
   return (
