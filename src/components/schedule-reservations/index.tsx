@@ -1,37 +1,58 @@
 import { Fragment, useState } from 'react'
 import Collapse from '@/components/collapse'
+import Select from '@/components/select'
 import CardOptionsPlaces, {
   PlaceOptionsData
 } from '@/components/card-options-places'
+import { GenericOptionType } from '@/types/fields'
 import * as S from './styles'
 
 export type PlacesOptionsProps = {
-  onChoose: (placeOptions: PlaceOptionsData) => void
+  onChooseCard: (placeOptions: PlaceOptionsData) => void
   placeOptions: PlaceOptionsData[]
 }
 
-const PlacesOptions = ({ onChoose, placeOptions }: PlacesOptionsProps) => {
-  const handleChoose = (option: PlaceOptionsData) => {
-    !!onChoose && onChoose(option)
+export type ScheduleReservationsProps = {
+  placeOptions: PlaceOptionsData[]
+  placesGroupsOptions: GenericOptionType[]
+}
+
+const PlacesOptions = ({ onChooseCard, placeOptions }: PlacesOptionsProps) => {
+  const handleChooseCard = (option: PlaceOptionsData) => {
+    !!onChooseCard && onChooseCard(option)
   }
 
   return (
     <S.WrapperCards>
       {placeOptions.map(option => (
         <Fragment key={option.placeId}>
-          <CardOptionsPlaces placeOption={option} onChoose={handleChoose} />
+          <CardOptionsPlaces
+            placeOption={option}
+            onChooseCard={handleChooseCard}
+          />
         </Fragment>
       ))}
     </S.WrapperCards>
   )
 }
 
-const collapseSettings = ({ handleChoose, placeOptions }) => [
+const collapseSettings = ({
+  handleChooseCard,
+  handleChooseGroup,
+  placeOptions,
+  placesGroupsOptions
+}) => [
   {
     icon: <S.PlaceIcon />,
     heading: 'Selecionar Espaços',
     children: (
-      <PlacesOptions placeOptions={placeOptions} onChoose={handleChoose} />
+      <>
+        <Select options={placesGroupsOptions} onChange={handleChooseGroup} />
+        <PlacesOptions
+          placeOptions={placeOptions}
+          onChooseCard={handleChooseCard}
+        />
+      </>
     )
   },
   {
@@ -47,18 +68,30 @@ const collapseSettings = ({ handleChoose, placeOptions }) => [
   }
 ]
 
-const ScheduleReservations = ({ placeOptions }) => {
+const ScheduleReservations = ({
+  placeOptions,
+  placesGroupsOptions
+}: ScheduleReservationsProps) => {
   const [activeCollapse, setActiveCollapse] = useState(0)
 
-  const handleChoose = (option: PlaceOptionsData) => {
+  const handleChooseCard = (option: PlaceOptionsData) => {
     console.log(option)
+  }
+
+  const handleChooseGroup = (value: string) => {
+    console.log(value)
   }
 
   return (
     <S.Wrapper>
       <S.Title>Escolha seu espaço</S.Title>
       <S.Content>
-        {collapseSettings({ placeOptions, handleChoose }).map((item, index) => (
+        {collapseSettings({
+          placeOptions,
+          placesGroupsOptions,
+          handleChooseCard,
+          handleChooseGroup
+        }).map((item, index) => (
           <Fragment key={index}>
             <Collapse
               icon={item.icon}

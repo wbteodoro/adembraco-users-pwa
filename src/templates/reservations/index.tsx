@@ -3,6 +3,7 @@ import Stepper from '@/components/stepper'
 import ScheduleReservations, {
   PlacesOptionsProps
 } from '@/components/schedule-reservations'
+import { GenericOptionType } from '@/types/fields'
 import * as S from './styles'
 
 const stepsSettings = [
@@ -11,9 +12,14 @@ const stepsSettings = [
   { label: 'Confirmação' }
 ]
 
+type TemplateReservationProps = {
+  placesGroupsOptions: GenericOptionType[]
+} & Pick<PlacesOptionsProps, 'placeOptions'>
+
 const TemplateReservations = ({
-  placeOptions
-}: Pick<PlacesOptionsProps, 'placeOptions'>) => {
+  placeOptions,
+  placesGroupsOptions
+}: TemplateReservationProps) => {
   const [currentStep, setCurrentStep] = React.useState(0)
 
   const handleBackStep = React.useCallback(() => {
@@ -43,7 +49,10 @@ const TemplateReservations = ({
     >
       <S.Wrapper>
         {currentStep === 0 && (
-          <ScheduleReservations placeOptions={placeOptions} />
+          <ScheduleReservations
+            placesGroupsOptions={placesGroupsOptions}
+            placeOptions={placeOptions}
+          />
         )}
         {currentStep === 1 && (
           <S.Content>

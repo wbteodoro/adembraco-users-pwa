@@ -9,15 +9,15 @@ export type PlaceOptionsData = {
 
 type CardOptionsPlacesProps = {
   placeOption: PlaceOptionsData
-  onChoose: (option: PlaceOptionsData) => void
+  onChooseCard: (option: PlaceOptionsData) => void
 }
 
 const CardOptionsPlaces = ({
   placeOption,
-  onChoose
+  onChooseCard
 }: CardOptionsPlacesProps) => {
   const handleChoose = () => {
-    !!onChoose && onChoose(placeOption)
+    !!onChooseCard && onChooseCard(placeOption)
   }
 
   return (

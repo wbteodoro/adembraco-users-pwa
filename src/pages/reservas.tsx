@@ -1,6 +1,17 @@
 import Head from 'next/head'
 import TemplateReservations from '@/templates/reservations'
 
+const placesGroupsOptions = [
+  {
+    label: 'Quadra',
+    value: 'Quadra'
+  },
+  {
+    label: 'Quiosque',
+    value: 'Quiosque'
+  }
+]
+
 const placeOptions = [
   {
     placeId: '1',
@@ -42,7 +53,10 @@ export default function ReservationsPage() {
       <Head>
         <title>ADEMBRACO - Reservas</title>
       </Head>
-      <TemplateReservations placeOptions={placeOptions} />
+      <TemplateReservations
+        placeOptions={placeOptions}
+        placesGroupsOptions={placesGroupsOptions}
+      />
     </>
   )
 }
