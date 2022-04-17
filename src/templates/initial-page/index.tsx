@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import MainLayout from '@/layouts/main'
 
 const TemplateHome = () => {
   return (
@@ -7,7 +6,6 @@ const TemplateHome = () => {
       <Head>
         <title>ADEMBRACO - Início</title>
       </Head>
-      <MainLayout>askjdaskljdas</MainLayout>
     </>
   )
 }

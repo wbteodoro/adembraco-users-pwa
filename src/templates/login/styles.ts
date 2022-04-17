@@ -4,9 +4,15 @@ export const Wrapper = styled.div`
   display: flex;
   height: 100vh;
   width: 100vw;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.white};
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    259deg,
+    rgba(255, 255, 255, 1) 21%,
+    rgba(0, 0, 0, 0.13769257703081228) 100%
+  );
+  padding-top: 80px;
 `
 
 export const ContainerLogin = styled.div`
@@ -19,7 +25,7 @@ export const ContainerLogin = styled.div`
   gap: 24px;
   padding: 24px;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: transparent;
   color: ${({ theme }) => theme.colors.white};
 `
 
@@ -33,10 +39,7 @@ export const Form = styled.form`
   gap: 24px;
 `
 
-export const Title = styled.h1`
-  ${({ theme }) => `
-    font-size: ${theme.font.sizes.xlarge};
-    font-weight: ${theme.font.bold};
-    color: ${theme.colors.green};
-  `}
+export const Logo = styled.img`
+  width: auto;
+  height: 80px;
 `

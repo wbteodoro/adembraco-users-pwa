@@ -19,7 +19,7 @@ const TemplateLogin = () => {
       </Head>
       <S.Wrapper>
         <S.ContainerLogin>
-          <S.Title>LOGIN</S.Title>
+          <S.Logo src="/images/ade_logo.png" />
           <S.Form noValidate onSubmit={handleSubmit}>
             <Input
               required
