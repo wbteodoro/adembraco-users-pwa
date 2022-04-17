@@ -1,5 +1,13 @@
-import TemplateHome from '@/templates/initial-page'
+import Head from 'next/head'
+import TemplateHome from '@/templates/home'
 
 export default function HomePage() {
-  return <TemplateHome />
+  return (
+    <>
+      <Head>
+        <title>ADEMBRACO - Início</title>
+      </Head>
+      <TemplateHome />
+    </>
+  )
 }
