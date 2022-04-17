@@ -22,6 +22,8 @@ export const CollapseContent = styled.div`
 
 export const HeadingWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: flex-start;
   gap: 8px;
 `
 

@@ -4,8 +4,8 @@ import * as S from './styles'
 
 const collapseSettings = [
   {
-    icon: <span>1.</span>,
-    heading: 'SELECIONAR ESPAÇOS',
+    icon: <S.PlaceIcon />,
+    heading: 'Selecionar Espaços',
     children: (
       <div>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
@@ -15,8 +15,8 @@ const collapseSettings = [
     )
   },
   {
-    icon: <span>2.</span>,
-    heading: 'SELECIONAR DATA',
+    icon: <S.ScheduleIcon />,
+    heading: 'Selecionar Horários',
     children: (
       <div>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
@@ -29,29 +29,25 @@ const collapseSettings = [
 
 const ScheduleReservations = () => {
   const [activeCollapse, setActiveCollapse] = useState(0)
-  //   const [isOpen, setIsOpen] = useState(active)
-
-  //   const handleToggleCollapse = (index: number) => {
-  //     if (index === activeCollapse) return setActiveCollapse(-1)
-  //     return setActiveCollapse(index)
-  //   }
 
   return (
     <S.Wrapper>
       <S.Title>Escolha seu espaço</S.Title>
-      {collapseSettings.map((item, index) => (
-        <Fragment key={index}>
-          <Collapse
-            icon={item.icon}
-            heading={item.heading}
-            isOpen={activeCollapse === index}
-            setOpen={setActiveCollapse}
-            order={index}
-          >
-            {item.children}
-          </Collapse>
-        </Fragment>
-      ))}
+      <S.Content>
+        {collapseSettings.map((item, index) => (
+          <Fragment key={index}>
+            <Collapse
+              icon={item.icon}
+              heading={<S.Heading>{index + 1 + '. ' + item.heading}</S.Heading>}
+              isOpen={activeCollapse === index}
+              setOpen={setActiveCollapse}
+              order={index}
+            >
+              {item.children}
+            </Collapse>
+          </Fragment>
+        ))}
+      </S.Content>
     </S.Wrapper>
   )
 }

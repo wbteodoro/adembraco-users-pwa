@@ -18,12 +18,13 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   height: auto;
-  padding: 16px 32px;
+  padding: 16px;
 `
 
 export const Stepper = styled.div`
   display: flex;
   z-index: 10;
+  padding: 0 16px;
   align-items: center;
   justify-content: space-between;
   width: 100%;
