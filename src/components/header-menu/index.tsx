@@ -29,7 +29,7 @@ const menuItems = [
 const HeaderMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleClick = useCallback(() => {
+  const handleToggle = useCallback(() => {
     setIsOpen(prevState => !prevState)
   }, [])
 
@@ -39,7 +39,7 @@ const HeaderMenu = () => {
         <Button
           icon={!isOpen ? <S.MenuIcon /> : <S.CloseIcon />}
           variant="secondary"
-          onClick={handleClick}
+          onClick={handleToggle}
         />
         <S.Avatar src="/images/default-avatar.png" alt="avatar" />
         <S.Logo src="/icon-192x192.png" alt="logo" />
@@ -51,7 +51,7 @@ const HeaderMenu = () => {
           {menuItems.map((item, index) => (
             <S.MenuItem key={index}>
               <Link href={item.href} passHref>
-                <S.MenuLink>{item.label}</S.MenuLink>
+                <S.MenuLink onClick={handleToggle}>{item.label}</S.MenuLink>
               </Link>
             </S.MenuItem>
           ))}

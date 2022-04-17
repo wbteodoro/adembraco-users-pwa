@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   height: 100vh;
   width: 100vw;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   background: rgb(255, 255, 255);
   background: linear-gradient(
@@ -12,7 +12,6 @@ export const Wrapper = styled.div`
     rgba(255, 255, 255, 1) 21%,
     rgba(0, 0, 0, 0.13769257703081228) 100%
   );
-  padding-top: 80px;
 `
 
 export const ContainerLogin = styled.div`
@@ -26,7 +25,6 @@ export const ContainerLogin = styled.div`
   padding: 24px;
   border-radius: 8px;
   background-color: transparent;
-  color: ${({ theme }) => theme.colors.white};
 `
 
 export const Form = styled.form`

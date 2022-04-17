@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import TemplateHome from '@/templates/home'
 
-export default function ReservationsPage() {
+export default function SubscriptionsPage() {
   return (
     <>
       <Head>
-        <title>ADEMBRACO - Reservas</title>
+        <title>ADEMBRACO - Inscrições</title>
       </Head>
       <TemplateHome />
     </>
