@@ -5,27 +5,27 @@ import * as S from './styles'
 const menuItems = [
   {
     label: 'Reservas',
-    icon: <S.Icon />,
+    icon: <S.ReservationsIcon />,
     href: '/reservas'
   },
   {
     label: 'Inscrições',
-    icon: <S.Icon />,
+    icon: <S.SubscriptionIcon />,
     href: '/inscricoes'
   },
   {
     label: 'Histórico',
-    icon: <S.Icon />,
+    icon: <S.HistoryIcon />,
     href: '/historico'
   },
   {
     label: 'Meus Dados',
-    icon: <S.Icon />,
+    icon: <S.UserIcon />,
     href: '/meus-dados'
   },
   {
     label: 'Sair',
-    icon: <S.Icon />,
+    icon: <S.LogoutIcon />,
     href: '/entrar'
   }
 ]

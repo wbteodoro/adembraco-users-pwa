@@ -1,5 +1,11 @@
 import styled from 'styled-components'
-import { Error } from '@styled-icons/material'
+import {
+  CalendarToday,
+  PermContactCalendar,
+  History,
+  ManageAccounts,
+  Logout
+} from '@styled-icons/material'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,4 +14,8 @@ export const Wrapper = styled.div`
   padding: 16px;
 `
 
-export const Icon = styled(Error)``
+export const ReservationsIcon = styled(CalendarToday)``
+export const SubscriptionIcon = styled(PermContactCalendar)``
+export const HistoryIcon = styled(History)``
+export const UserIcon = styled(ManageAccounts)``
+export const LogoutIcon = styled(Logout)``

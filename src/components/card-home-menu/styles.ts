@@ -23,8 +23,8 @@ export const MenuItem = styled.div``
 
 export const MenuItemIcon = styled.span`
   color: ${({ theme }) => theme.colors.green};
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
 `
 
 export const MenuItemLabel = styled.span`
