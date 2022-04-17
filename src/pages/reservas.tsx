@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import TemplateHome from '@/templates/home'
+import TemplateReservations from '@/templates/reservations'
 
 export default function ReservationsPage() {
   return (
@@ -7,7 +7,7 @@ export default function ReservationsPage() {
       <Head>
         <title>ADEMBRACO - Reservas</title>
       </Head>
-      <TemplateHome />
+      <TemplateReservations />
     </>
   )
 }

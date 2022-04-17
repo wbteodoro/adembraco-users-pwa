@@ -23,7 +23,7 @@ export const Wrapper = styled.div`
 export const WrapperHeader = styled.header`
   position: fixed;
   z-index: 1000;
-  top: 0;
+  top: 20;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -64,7 +64,7 @@ export const SideMenu = styled.div<SideMenuProps>`
   width: 100%;
   height: calc(100% - ${HEADER_HEIGHT});
   background-color: ${({ theme }) => theme.colors.green};
-  z-index: 1;
+  z-index: 30;
   transform: ${({ isOpen }) =>
     isOpen ? 'translateX(0)' : 'translateX(-100%)'};
   transition: transform 0.3s ease-in-out;
