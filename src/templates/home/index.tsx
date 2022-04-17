@@ -33,6 +33,10 @@ const menuItems = [
 const TemplateHome = () => {
   return (
     <S.Wrapper>
+      <S.TitleWrapper>
+        <S.Title>Bem vindo, Fulano da Silva!</S.Title>
+        <S.SubTitle>O que deseja fazer?</S.SubTitle>
+      </S.TitleWrapper>
       {menuItems.map((item, index) => (
         <Fragment key={item.label + index}>
           <CardHomeMenu icon={item.icon} label={item.label} href={item.href} />

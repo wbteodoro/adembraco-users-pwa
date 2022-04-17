@@ -1,27 +1,32 @@
 import { useCallback, useState } from 'react'
 import Link from 'next/link'
-import Button from '../button'
+import Button from '@/components/button'
 import * as S from './styles'
 
 const menuItems = [
   {
     label: 'Reservas',
+    icon: <S.ReservationsIcon />,
     href: '/reservas'
   },
   {
     label: 'Inscrições',
+    icon: <S.SubscriptionIcon />,
     href: '/inscricoes'
   },
   {
     label: 'Histórico',
+    icon: <S.HistoryIcon />,
     href: '/historico'
   },
   {
     label: 'Meus Dados',
+    icon: <S.UserIcon />,
     href: '/meus-dados'
   },
   {
     label: 'Sair',
+    icon: <S.LogoutIcon />,
     href: '/entrar'
   }
 ]
@@ -51,7 +56,10 @@ const HeaderMenu = () => {
           {menuItems.map((item, index) => (
             <S.MenuItem key={index}>
               <Link href={item.href} passHref>
-                <S.MenuLink onClick={handleToggle}>{item.label}</S.MenuLink>
+                <S.MenuLink onClick={handleToggle}>
+                  {!!item.icon && item.icon}
+                  {item.label}
+                </S.MenuLink>
               </Link>
             </S.MenuItem>
           ))}
