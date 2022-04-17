@@ -1,6 +1,8 @@
 import * as React from 'react'
 import Stepper from '@/components/stepper'
-import ScheduleReservations from '@/components/schedule-reservations'
+import ScheduleReservations, {
+  PlacesOptionsProps
+} from '@/components/schedule-reservations'
 import * as S from './styles'
 
 const stepsSettings = [
@@ -9,7 +11,9 @@ const stepsSettings = [
   { label: 'Confirmação' }
 ]
 
-const TemplateReservations = () => {
+const TemplateReservations = ({
+  placeOptions
+}: Pick<PlacesOptionsProps, 'placeOptions'>) => {
   const [currentStep, setCurrentStep] = React.useState(0)
 
   const handleBackStep = React.useCallback(() => {
@@ -38,25 +42,27 @@ const TemplateReservations = () => {
       onFinishStepper={handleFinishStepper}
     >
       <S.Wrapper>
-        {currentStep === 0 && <ScheduleReservations />}
+        {currentStep === 0 && (
+          <ScheduleReservations placeOptions={placeOptions} />
+        )}
         {currentStep === 1 && (
           <S.Content>
             <S.Title>Pagamento</S.Title>
-            <S.Description>
+            <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
               consectetur, nisi sed consectetur sagittis, nisl erat cursus
               lacus, eget condimentum nunc nisl eu nisi.
-            </S.Description>
+            </p>
           </S.Content>
         )}
         {currentStep === 2 && (
           <S.Content>
             <S.Title>Confirmação</S.Title>
-            <S.Description>
+            <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
               consectetur, nisi sed consectetur sagittis, nisl erat cursus
               lacus, eget condimentum nunc nisl eu nisi.
-            </S.Description>
+            </p>
           </S.Content>
         )}
       </S.Wrapper>

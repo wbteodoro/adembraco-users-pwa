@@ -20,6 +20,14 @@ export const Content = styled.div`
   height: auto;
 `
 
+export const WrapperCards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-auto-rows: auto;
+  gap: 8px;
+  padding: 16px 0;
+`
+
 export const Title = styled.h1``
 
 export const PlaceIcon = styled(Place).attrs(props => ({
