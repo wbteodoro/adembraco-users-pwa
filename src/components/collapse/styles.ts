@@ -4,15 +4,19 @@ import { ExpandLess, ExpandMore } from 'styled-icons/material'
 export const Wrapper = styled.div`
   width: 100%;
   overflow: hidden;
-  transition: max-height 0.2s ease-in-out;
+  transition: height 0.2s ease-in-out;
+  border-radius: 8px;
 `
-export const CollapseHeader = styled.div`
+export const CollapseHeader = styled.button<{ disabled: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 8px;
   gap: 8px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  background: ${({ theme }) => theme.colors.lightGrey};
+  width: 100%;
+  border-radius: 8px;
 `
 
 export const CollapseContent = styled.div`

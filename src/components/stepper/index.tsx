@@ -10,6 +10,7 @@ export type StepperProps = {
   onBackStep(): void
   onFinishStepper(): void
   children: React.ReactNode
+  disabledNextStepButton: boolean
 }
 
 const Stepper = ({
@@ -19,6 +20,7 @@ const Stepper = ({
   onForwardStep,
   onBackStep,
   onFinishStepper,
+  disabledNextStepButton,
   children
 }: StepperProps) => {
   const [lineWidth, setLineWidth] = React.useState(1)
@@ -99,6 +101,7 @@ const Stepper = ({
             Anterior
           </Button>
           <Button
+            disabled={disabledNextStepButton}
             onClick={
               currentStep === stepsLength - 1 ? onFinishStepper : onForwardStep
             }

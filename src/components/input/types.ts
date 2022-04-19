@@ -16,7 +16,13 @@ export type GenericOptionType<T = string> = {
   label: string
 }
 
-export type InputType = 'text' | 'password' | 'number' | 'email' | 'money'
+export type InputType =
+  | 'text'
+  | 'password'
+  | 'number'
+  | 'email'
+  | 'money'
+  | 'date'
 
 type CustomInputProps = {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void

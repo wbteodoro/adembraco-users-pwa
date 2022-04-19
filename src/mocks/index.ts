@@ -46,7 +46,7 @@ export const placeOptions = [
 
 export const placeSchedules = [
   {
-    price: 40.0,
+    price: 40,
     placeId: '1',
     scheduleId: '1',
     name: 'Manhã',
@@ -54,7 +54,7 @@ export const placeSchedules = [
     endTime: '12:00'
   },
   {
-    price: 40.0,
+    price: 45,
     placeId: '1',
     scheduleId: '2',
     name: 'Tarde',
@@ -62,7 +62,7 @@ export const placeSchedules = [
     endTime: '18:00'
   },
   {
-    price: 40.0,
+    price: 35,
     placeId: '1',
     scheduleId: '3',
     name: 'Noite',
@@ -70,7 +70,7 @@ export const placeSchedules = [
     endTime: '22:00'
   },
   {
-    price: 40.0,
+    price: 34,
     placeId: '2',
     scheduleId: '4',
     name: 'Manhã',
@@ -78,7 +78,7 @@ export const placeSchedules = [
     endTime: '12:00'
   },
   {
-    price: 40.0,
+    price: 45,
     placeId: '2',
     scheduleId: '5',
     name: 'Tarde',
@@ -86,7 +86,7 @@ export const placeSchedules = [
     endTime: '18:00'
   },
   {
-    price: 40.0,
+    price: 65,
     placeId: '2',
     scheduleId: '6',
     name: 'Noite',
@@ -94,7 +94,7 @@ export const placeSchedules = [
     endTime: '22:00'
   },
   {
-    price: 40.0,
+    price: 30,
     placeId: '3',
     scheduleId: '7',
     name: 'Manhã',
@@ -102,7 +102,7 @@ export const placeSchedules = [
     endTime: '12:00'
   },
   {
-    price: 40.0,
+    price: 40,
     placeId: '3',
     scheduleId: '8',
     name: 'Tarde',
@@ -110,7 +110,7 @@ export const placeSchedules = [
     endTime: '18:00'
   },
   {
-    price: 40.0,
+    price: 40,
     placeId: '3',
     scheduleId: '9',
     name: 'Noite',
@@ -118,7 +118,7 @@ export const placeSchedules = [
     endTime: '22:00'
   },
   {
-    price: 40.0,
+    price: 12,
     placeId: '4',
     scheduleId: '10',
     name: 'Manhã',
@@ -126,7 +126,7 @@ export const placeSchedules = [
     endTime: '12:00'
   },
   {
-    price: 40.0,
+    price: 45,
     placeId: '4',
     scheduleId: '11',
     name: 'Tarde',
@@ -134,7 +134,7 @@ export const placeSchedules = [
     endTime: '18:00'
   },
   {
-    price: 40.0,
+    price: 40,
     placeId: '4',
     scheduleId: '12',
     name: 'Noite',

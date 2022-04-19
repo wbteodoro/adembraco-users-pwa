@@ -1,9 +1,7 @@
 import * as React from 'react'
 import Stepper from '@/components/stepper'
-import ScheduleReservations, {
-  PlacesOptionsProps
-} from '@/components/schedule-reservations'
-import { GenericOptionType } from '@/types/fields'
+import ScheduleReservations from '@/components/schedule-reservations'
+import useService from '@/contexts/services'
 import * as S from './styles'
 
 const stepsSettings = [
@@ -12,17 +10,14 @@ const stepsSettings = [
   { label: 'Confirmação' }
 ]
 
-type TemplateReservationProps = {
-  placesGroupsOptions: GenericOptionType[]
-  onChooseGroup?(group: GenericOptionType): void
-} & Pick<PlacesOptionsProps, 'placeOptions' | 'onChooseCard'>
+const TemplateReservations = () => {
+  const {
+    saveReservations,
+    getReservationsData,
+    reservationsData,
+    selectedSchedule
+  } = useService()
 
-const TemplateReservations = ({
-  placeOptions,
-  placesGroupsOptions,
-  onChooseCard,
-  onChooseGroup
-}: TemplateReservationProps) => {
   const [currentStep, setCurrentStep] = React.useState(0)
 
   const handleBackStep = React.useCallback(() => {
@@ -30,8 +25,12 @@ const TemplateReservations = ({
   }, [])
 
   const handleForwardStep = React.useCallback(() => {
+    if (currentStep === 0) {
+      saveReservations()
+      getReservationsData()
+    }
     setCurrentStep(prevState => prevState + 1)
-  }, [])
+  }, [currentStep, getReservationsData, saveReservations])
 
   const handleChangePreviousStep = React.useCallback((backTo: number) => {
     setCurrentStep(backTo)
@@ -49,24 +48,20 @@ const TemplateReservations = ({
       onBackStep={handleBackStep}
       onForwardStep={handleForwardStep}
       onFinishStepper={handleFinishStepper}
+      disabledNextStepButton={selectedSchedule.length <= 0}
     >
       <S.Wrapper>
-        {currentStep === 0 && (
-          <ScheduleReservations
-            placesGroupsOptions={placesGroupsOptions}
-            placeOptions={placeOptions}
-            onChooseGroup={onChooseGroup}
-            onChooseCard={onChooseCard}
-          />
-        )}
+        {currentStep === 0 && <ScheduleReservations />}
         {currentStep === 1 && (
           <S.Content>
             <S.Title>Pagamento</S.Title>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              consectetur, nisi sed consectetur sagittis, nisl erat cursus
-              lacus, eget condimentum nunc nisl eu nisi.
-            </p>
+            {reservationsData.schedules.length > 0 && (
+              <div>
+                <span>{reservationsData.date}</span>
+                <span>{reservationsData.place.name}</span>
+                <pre>{JSON.stringify(reservationsData.schedules, null, 4)}</pre>
+              </div>
+            )}
           </S.Content>
         )}
         {currentStep === 2 && (

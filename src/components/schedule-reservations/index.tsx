@@ -1,10 +1,11 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useCallback, useState } from 'react'
 import Collapse from '@/components/collapse'
 import Select from '@/components/select'
-import CardOptionsPlaces, {
-  PlaceOptionsData
-} from '@/components/card-options-places'
-import { GenericOptionType } from '@/types/fields'
+import Input from '@/components/input'
+import CardOptionsPlaces from '@/components/card-options-places'
+import useService from '@/contexts/services'
+import { PlaceOptionsData } from '@/types'
+import { currencyFormatter } from '@/utils/helpers'
 import * as S from './styles'
 
 export type PlacesOptionsProps = {
@@ -12,14 +13,8 @@ export type PlacesOptionsProps = {
   placeOptions: PlaceOptionsData[]
 }
 
-export type ScheduleReservationsProps = {
-  placeOptions: PlaceOptionsData[]
-  placesGroupsOptions: GenericOptionType[]
-  onChooseCard?(place: PlaceOptionsData): void
-  onChooseGroup?(group: GenericOptionType): void
-}
-
 const PlacesOptions = ({ onChooseCard, placeOptions }: PlacesOptionsProps) => {
+  const { selectedPlaceId } = useService()
   const handleChooseCard = (option: PlaceOptionsData) => {
     !!onChooseCard && onChooseCard(option)
   }
@@ -29,6 +24,7 @@ const PlacesOptions = ({ onChooseCard, placeOptions }: PlacesOptionsProps) => {
       {placeOptions.map(option => (
         <Fragment key={option.placeId}>
           <CardOptionsPlaces
+            isActive={selectedPlaceId === option.placeId}
             placeOption={option}
             onChooseCard={handleChooseCard}
           />
@@ -38,68 +34,129 @@ const PlacesOptions = ({ onChooseCard, placeOptions }: PlacesOptionsProps) => {
   )
 }
 
-const collapseSettings = ({
-  handleChooseCard,
-  handleChooseGroup,
-  placeOptions,
-  placesGroupsOptions
-}) => [
+const ContentFirstCollapse = ({ onChoosePlaceCardOption }) => {
+  const {
+    placesOptionsByGroup,
+    placesGroupsOptions,
+    choosePlaceGroup,
+    choosePlaceCardOption
+  } = useService()
+
+  const handleChooseCard = useCallback(
+    (option: PlaceOptionsData) => {
+      choosePlaceCardOption(option)
+      !!onChoosePlaceCardOption && onChoosePlaceCardOption()
+    },
+    [choosePlaceCardOption, onChoosePlaceCardOption]
+  )
+
+  return (
+    <S.WrapperSelectPlace>
+      <Select
+        defaultLabel="Selecione o espaço desejado"
+        options={placesGroupsOptions}
+        onChange={choosePlaceGroup}
+        label="Selecionar tipo de espaço"
+      />
+      <PlacesOptions
+        placeOptions={placesOptionsByGroup}
+        onChooseCard={handleChooseCard}
+      />
+    </S.WrapperSelectPlace>
+  )
+}
+
+const ContentSecondCollapse = () => {
+  const {
+    schedulesByDate,
+    getSchedulesByDate,
+    setSelectedSchedule,
+    selectedSchedule
+  } = useService()
+
+  const handleAddOrRemoveSchedule = useCallback(
+    ({ id, isActive }) => {
+      setSelectedSchedule(prevState =>
+        !isActive
+          ? [...prevState, id]
+          : prevState.filter(scheduleId => scheduleId !== id)
+      )
+    },
+    [setSelectedSchedule]
+  )
+
+  return (
+    <S.WrapperSchedule>
+      <Input
+        min="2022-04-17"
+        max="2022-04-24"
+        name="schedule-place"
+        type="date"
+        onChange={getSchedulesByDate}
+        label="Data da reserva"
+        defaultValue={new Date().toISOString().split('T')[0]}
+      />
+      <S.SchedulesList>
+        {schedulesByDate.map(schedule => {
+          const activeSchedule = selectedSchedule.includes(schedule.scheduleId)
+          return (
+            <S.ScheduleItem
+              onClick={() =>
+                handleAddOrRemoveSchedule({
+                  id: schedule.scheduleId,
+                  isActive: activeSchedule
+                })
+              }
+              key={Math.random()}
+              active={activeSchedule}
+            >
+              <S.ScheduleTime>
+                {activeSchedule ? <S.CheckedIcon /> : <S.UncheckedIcon />}
+                Horário livre
+              </S.ScheduleTime>
+              <S.ScheduleTime>
+                {schedule.startTime + ' - ' + schedule.endTime}
+              </S.ScheduleTime>
+              <S.SchedulePrice>
+                {currencyFormatter({ value: schedule.price })}
+              </S.SchedulePrice>
+            </S.ScheduleItem>
+          )
+        })}
+      </S.SchedulesList>
+    </S.WrapperSchedule>
+  )
+}
+
+const collapseSettings = (onChoosePlaceCardOption: () => void) => [
   {
     icon: <S.PlaceIcon />,
     heading: 'Selecionar Espaços',
     children: (
-      <S.WrapperSelectPlace>
-        <Select
-          defaultLabel="Selecione o espaço desejado"
-          options={placesGroupsOptions}
-          onChange={handleChooseGroup}
-        />
-        <PlacesOptions
-          placeOptions={placeOptions}
-          onChooseCard={handleChooseCard}
-        />
-      </S.WrapperSelectPlace>
+      <ContentFirstCollapse onChoosePlaceCardOption={onChoosePlaceCardOption} />
     )
   },
   {
     icon: <S.ScheduleIcon />,
     heading: 'Selecionar Horários',
-    children: (
-      <div>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-        consectetur, nisi sed consectetur sagittis, nisl erat cursus lacus, eget
-        condimentum nunc nisl eu nisi.
-      </div>
-    )
+    children: <ContentSecondCollapse />
   }
 ]
 
-const ScheduleReservations = ({
-  placeOptions,
-  placesGroupsOptions,
-  onChooseCard,
-  onChooseGroup
-}: ScheduleReservationsProps) => {
+const ScheduleReservations = () => {
+  const { selectedPlaceId } = useService()
+
   const [activeCollapse, setActiveCollapse] = useState(0)
 
-  const handleChooseCard = (option: PlaceOptionsData) => {
-    !!onChooseCard && onChooseCard(option)
-  }
-
-  const handleChooseGroup = (group: GenericOptionType) => {
-    !!onChooseGroup && onChooseGroup(group)
-  }
+  const onChoosePlaceCardOption = useCallback(() => {
+    setActiveCollapse(prevState => prevState + 1)
+  }, [])
 
   return (
     <S.Wrapper>
       <S.Title>Escolha seu espaço</S.Title>
       <S.Content>
-        {collapseSettings({
-          placeOptions,
-          placesGroupsOptions,
-          handleChooseCard,
-          handleChooseGroup
-        }).map((item, index) => (
+        {collapseSettings(onChoosePlaceCardOption).map((item, index) => (
           <Fragment key={index}>
             <Collapse
               icon={item.icon}
@@ -107,8 +164,9 @@ const ScheduleReservations = ({
               isOpen={activeCollapse === index}
               setOpen={setActiveCollapse}
               order={index}
+              disabled={!selectedPlaceId && index === 1}
             >
-              {item.children}
+              <S.BodyContent>{item.children}</S.BodyContent>
             </Collapse>
           </Fragment>
         ))}

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.button`
+export const Wrapper = styled.button<{ isActive: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,8 +17,10 @@ export const Wrapper = styled.button`
 
   cursor: pointer;
 
-  background: ${({ theme }) => theme.colors.white};
-  border: 0.1rem solid ${({ theme }) => theme.colors.lightGrey};
+  background: ${({ theme, isActive }) =>
+    theme.colors[isActive ? 'lightGrey' : 'white']};
+  border: 2px solid
+    ${({ theme, isActive }) => theme.colors[isActive ? 'orange' : 'white']};
   box-shadow: ${({ theme }) => theme.effects.dropShadow.elev1};
 
   overflow-y: auto;

@@ -41,12 +41,6 @@ export const Info = styled.div<InfoProps>`
   align-items: stretch;
   width: 100%;
 
-  label {
-    line-height: 2;
-    font-weight: bold;
-    font-size: ${({ theme }) => theme.font.sizes.xsmall};
-  }
-
   select {
     width: 100%;
     height: 40px;
@@ -76,5 +70,10 @@ export const InputGroup = styled.div`
 `
 export const Field = styled.select``
 
-export const Label = styled.label``
+export const Label = styled.label`
+  color: ${({ theme }) => theme.colors.darkGrey};
+  line-height: 2;
+  font-weight: ${({ theme }) => theme.font.regular};
+  font-size: ${({ theme }) => theme.font.sizes.xsmall};
+`
 export const Anchor = styled.a``
