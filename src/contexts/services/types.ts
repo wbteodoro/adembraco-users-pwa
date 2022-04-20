@@ -8,7 +8,7 @@ import {
 export type ServiceContextData = {
   placesOptionsByGroup: PlaceOptionsData[]
   placesGroupsOptions: GenericOptionType[]
-  schedulesByDate: PlaceSchedulesType[]
+  schedulesByDateAndPlace: PlaceSchedulesType[]
   selectedPlaceId: PlaceSchedulesType['placeId']
   choosePlaceGroup(value: string): void
   choosePlaceCardOption(option: PlaceOptionsData): void
@@ -24,5 +24,10 @@ export type ServiceContextData = {
   selectedDate: string
   saveReservations(): void
   getReservationsData(): void
-  reservationsData: Record<string, any>
+  reservationsData: {
+    place: PlaceOptionsData
+    date: string
+    schedules: PlaceSchedulesType[]
+    totalPrice: number
+  }
 }

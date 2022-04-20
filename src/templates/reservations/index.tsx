@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Stepper from '@/components/stepper'
 import ScheduleReservations from '@/components/schedule-reservations'
+import PaymentReservations from '@/components/payment-reservations'
 import useService from '@/contexts/services'
 import * as S from './styles'
 
@@ -11,12 +12,8 @@ const stepsSettings = [
 ]
 
 const TemplateReservations = () => {
-  const {
-    saveReservations,
-    getReservationsData,
-    reservationsData,
-    selectedSchedule
-  } = useService()
+  const { saveReservations, getReservationsData, selectedSchedule } =
+    useService()
 
   const [currentStep, setCurrentStep] = React.useState(0)
 
@@ -52,18 +49,7 @@ const TemplateReservations = () => {
     >
       <S.Wrapper>
         {currentStep === 0 && <ScheduleReservations />}
-        {currentStep === 1 && (
-          <S.Content>
-            <S.Title>Pagamento</S.Title>
-            {reservationsData.schedules.length > 0 && (
-              <div>
-                <span>{reservationsData.date}</span>
-                <span>{reservationsData.place.name}</span>
-                <pre>{JSON.stringify(reservationsData.schedules, null, 4)}</pre>
-              </div>
-            )}
-          </S.Content>
-        )}
+        {currentStep === 1 && <PaymentReservations />}
         {currentStep === 2 && (
           <S.Content>
             <S.Title>Confirmação</S.Title>

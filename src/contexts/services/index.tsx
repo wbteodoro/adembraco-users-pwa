@@ -18,30 +18,40 @@ type ServiceProviderProps = {
 }
 
 export const ServiceProvider = ({ children }: ServiceProviderProps) => {
-  const [placesOptionsByGroup, setPlacesOptionsByGroup] = useState([])
-  const [schedulesByDate, setSchedulesByDate] = useState([])
+  const [placesOptionsByGroup, setPlacesOptionsByGroup] = useState<
+    ServiceContextData['placesOptionsByGroup']
+  >([])
+  const [schedulesByDateAndPlace, setSchedulesByDateAndPlace] = useState<
+    ServiceContextData['schedulesByDateAndPlace']
+  >([])
   const [selectedPlaceId, setSelectedPlaceId] = useState('')
   const [selectedDate, setSelectedDate] = useState('')
-  const [selectedSchedule, setSelectedSchedule] = useState([])
+  const [selectedSchedule, setSelectedSchedule] = useState<
+    ServiceContextData['selectedSchedule']
+  >([])
 
-  const [reservationsData, setReservationsData] = useState({
-    place: {},
+  const [reservationsData, setReservationsData] = useState<
+    ServiceContextData['reservationsData']
+  >({
+    place: {} as typeof placeOptions[0],
     date: '',
-    schedules: []
+    schedules: [],
+    totalPrice: 0
   })
 
   useEffect(() => {
     const schedules = placeSchedules.filter(
       schedule => schedule.placeId === selectedPlaceId
     )
-    setSchedulesByDate(schedules)
+    setSchedulesByDateAndPlace(schedules)
+    setSelectedDate(new Date().toISOString().split('T')[0])
   }, [selectedPlaceId])
 
   const choosePlaceCardOption = useCallback(
     option => {
       if (option.placeId !== selectedPlaceId) {
         setSelectedSchedule([])
-        setSchedulesByDate([])
+        setSchedulesByDateAndPlace([])
       }
       setSelectedPlaceId(option.placeId)
     },
@@ -54,7 +64,7 @@ export const ServiceProvider = ({ children }: ServiceProviderProps) => {
     )
     setPlacesOptionsByGroup(placesFiltered)
     setSelectedSchedule([])
-    setSchedulesByDate([])
+    setSchedulesByDateAndPlace([])
     setSelectedPlaceId(null)
   }, [])
 
@@ -65,7 +75,7 @@ export const ServiceProvider = ({ children }: ServiceProviderProps) => {
       const schedules = placeSchedules.filter(
         schedule => schedule.placeId === selectedPlaceId
       )
-      setSchedulesByDate(schedules)
+      setSchedulesByDateAndPlace(schedules)
       setSelectedSchedule([])
     },
     [selectedPlaceId]
@@ -77,17 +87,29 @@ export const ServiceProvider = ({ children }: ServiceProviderProps) => {
     if (data) {
       const { selectedPlaceId, selectedDate, selectedSchedule } = data
 
+      const schedules: typeof schedulesByDateAndPlace = []
+
+      for (let i = 0; i < selectedSchedule.length; i++) {
+        for (let j = 0; j < schedulesByDateAndPlace.length; j++) {
+          if (schedulesByDateAndPlace[j].scheduleId === selectedSchedule[i]) {
+            schedules.push(schedulesByDateAndPlace[j])
+          }
+        }
+      }
+
+      console.log(selectedDate)
+
       setReservationsData({
         place: placeOptions.find(place => selectedPlaceId === place.placeId),
         date: selectedDate.split('-').reverse().join('/'),
-        schedules: selectedSchedule.map(schedule =>
-          placeSchedules.filter(
-            placeSchedule => placeSchedule.scheduleId === schedule
-          )
+        schedules,
+        totalPrice: schedules.reduce(
+          (total, schedule) => total + schedule.price,
+          0
         )
       })
     }
-  }, [])
+  }, [schedulesByDateAndPlace])
 
   const saveReservations = useCallback(() => {
     setStorageItem('reservations', {
@@ -103,7 +125,7 @@ export const ServiceProvider = ({ children }: ServiceProviderProps) => {
         placesOptionsByGroup,
         selectedPlaceId,
         placesGroupsOptions,
-        schedulesByDate,
+        schedulesByDateAndPlace,
         choosePlaceGroup,
         choosePlaceCardOption,
         getSchedulesByDate,

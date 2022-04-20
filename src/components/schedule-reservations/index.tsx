@@ -68,7 +68,7 @@ const ContentFirstCollapse = ({ onChoosePlaceCardOption }) => {
 
 const ContentSecondCollapse = () => {
   const {
-    schedulesByDate,
+    schedulesByDateAndPlace,
     getSchedulesByDate,
     setSelectedSchedule,
     selectedSchedule
@@ -97,7 +97,7 @@ const ContentSecondCollapse = () => {
         defaultValue={new Date().toISOString().split('T')[0]}
       />
       <S.SchedulesList>
-        {schedulesByDate.map(schedule => {
+        {schedulesByDateAndPlace.map(schedule => {
           const activeSchedule = selectedSchedule.includes(schedule.scheduleId)
           return (
             <S.ScheduleItem

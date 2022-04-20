@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import {
   Place,
   Schedule,
-  RadioButtonChecked,
-  RadioButtonUnchecked
+  CheckBoxOutlineBlank,
+  CheckBox
 } from '@styled-icons/material'
 
 export const Wrapper = styled.div`
@@ -43,7 +43,12 @@ export const WrapperSelectPlace = styled.div`
   height: auto;
 `
 
-export const Title = styled.h1``
+export const Title = styled.h1`
+  font-size: ${({ theme }) => theme.font.sizes.large};
+  font-weight: bold;
+  color: ${props => props.theme.colors.darkGrey};
+  line-height: 1.2;
+`
 
 export const BodyContent = styled.div`
   flex: 1;
@@ -103,14 +108,14 @@ export const ScheduleIcon = styled(Schedule).attrs(props => ({
   size: 20
 }))``
 
-export const CheckedIcon = styled(RadioButtonChecked).attrs(props => ({
+export const CheckedIcon = styled(CheckBox).attrs(props => ({
   color: props.theme.colors.white,
   size: 20
 }))`
   margin-right: 8px;
 `
 
-export const UncheckedIcon = styled(RadioButtonUnchecked).attrs(props => ({
+export const UncheckedIcon = styled(CheckBoxOutlineBlank).attrs(props => ({
   color: props.theme.colors.white,
   size: 20
 }))`

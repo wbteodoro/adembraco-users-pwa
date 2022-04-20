@@ -9,6 +9,7 @@ export type PlaceSchedulesType = {
 
 export type PlaceOptionsData = {
   placeId: string
+  placeGroup: string
   imgUrl: string
   name: string
   description: string

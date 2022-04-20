@@ -18,8 +18,8 @@ export const Wrapper = styled.div<WrapperProps>`
 
   input {
     width: 100%;
-    height: 48px;
-    padding: 16px;
+    height: 32px;
+    padding: 8px;
     border-radius: 8px;
     color: ${({ theme }) => theme.colors.darkGrey};
 
@@ -61,11 +61,13 @@ export const Wrapper = styled.div<WrapperProps>`
 
 export const LabelWrapper = styled.div`
   display: inline-flex;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 `
 
 export const Label = styled.label`
   color: ${({ theme }) => theme.colors.darkGrey};
+  font-size: ${({ theme }) => theme.font.sizes.small};
+  font-weight: ${({ theme }) => theme.font.medium};
 `
 
 export const RequiredTag = styled.label`
